@@ -1,0 +1,25 @@
+{
+  "last_updated": "2026-03-20T18:00:00.000000",
+  "allocation": {
+    "Bollinger_Squeeze": 0.1111,
+    "EMA_Crossover_9_21": 0.1111,
+    "Opening_Range_Breakout": 0.1111,
+    "RSI_MACD_Momentum": 0.1111,
+    "Volume_Spike_Momentum": 0.1111,
+    "VWAP_Mean_Reversion": 0.1111,
+    "Gap_And_Go": 0.1111,
+    "Red_Green_Reversal": 0.1111,
+    "Price_Action_Scalp": 0.1111
+  },
+  "based_on_scores": {
+    "Bollinger_Squeeze": 50,
+    "EMA_Crossover_9_21": 50,
+    "Opening_Range_Breakout": 50,
+    "RSI_MACD_Momentum": 50,
+    "Volume_Spike_Momentum": 50,
+    "VWAP_Mean_Reversion": 50,
+    "Gap_And_Go": 50,
+    "Red_Green_Reversal": 50,
+    "Price_Action_Scalp": 50
+  }
+}

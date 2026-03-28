@@ -1,0 +1,61 @@
+[2026-03-26T19:39:12.019091] TELEGRAM MESSAGE (failed to send — proxy error in sandbox):
+
+🤖 CLAUDE COACH — ניתוח יומי 26/03/2026
+═══════════════════════════
+📊 עסקאות היום: 0
+💰 P&L: $0.00
+⚠️ סטטוס סוכן: DOWN 59+ שעות
+
+❌ בעיה קריטית: הסוכן לא רץ
+3 ימי מסחר ברצף הוחמצו:
+• 24/03 — נפל לפני פתיחה
+• 25/03 — לא הופעל
+• 26/03 — לא הופעל (גם אחרי תיקון הבאגים)
+
+═══════════════════════════
+🏆 Setups מנצחים (ממחקר 23/03):
+✅ EMA SHORT + Opening + TRENDING_DOWN = +$144 (SBUX)
+✅ Vol_Spike SHORT + Opening + TRENDING_DOWN = +$63 (OXY)
+
+דפוס משותף: Opening session + TRENDING_DOWN + SHORT direction
+
+═══════════════════════════
+📋 ציונים (ללא שינוי):
+• EMA_Crossover: 53.7 (7 עסקאות)
+• Volume_Spike: 49.3 (6 עסקאות)
+• Red_Green_Reversal: 25.6 (3 עסקאות)
+• שאר האסטרטגיות: 50 (0 עסקאות)
+
+═══════════════════════════
+🔧 3 תיקונים שנדרשים:
+🔴 1. Watchdog auto-restart (קריטי!)
+🟡 2. Per-symbol cooldown 60 דקות
+🟡 3. Signal staleness (צמצם ל-20 סמלים)
+
+עדיפות #1: להפעיל מחדש את הסוכן!
+
+[2026-03-26T19:49:XX] TELEGRAM MESSAGE (failed to send — proxy error in sandbox):
+
+🤖 CLAUDE COACH — ניתוח יומי 26/03/2026 (עדכון #2)
+═══════════════════════════
+📊 עסקאות היום: 0
+💰 P&L: $0.00
+⚠️ סטטוס: DOWN — 4 ימי מסחר ברצף אבדו
+
+🚨 URGENT: Opening session מתרחש עכשיו!
+השוק נפתח לפני ~50 דקות (09:30 ET)
+שני ה-setups המנצחים מחכים לביצוע...
+אבל הסוכן עדיין לא פועל.
+
+═══════════════════════════
+🏆 Setups מנצחים (מוכחים):
+✅ EMA SHORT + Opening + TRENDING_DOWN → +$144 (SBUX)
+✅ Vol_Spike SHORT + Opening + TRENDING_DOWN → +$63 (OXY)
+
+═══════════════════════════
+🔧 שינויים בסשן זה:
+• Volume_Spike: הוסר RANGING, direction_bias=SHORT
+• scores.json עודכן
+• daily_summary 26/03 נוסף ל-DB
+
+🔴 עדיפות #1: הפעל watchdog/auto-restart!

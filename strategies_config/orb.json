@@ -1,0 +1,26 @@
+{
+  "name": "Opening_Range_Breakout",
+  "enabled": true,
+  "file": "strategies/orb.py",
+  "timeframe": "1Min",
+
+  "params": {
+    "range_minutes": 15,
+    "breakout_buffer_pct": 0.002,
+    "min_range_pct": 0.005,
+    "max_range_pct": 0.03,
+    "min_volume_ratio": 1.5,
+    "stop_loss": "opposite_end_of_range",
+    "take_profit_mult": 2.0
+  },
+
+  "activation_conditions": {
+    "sessions": ["opening"],
+    "market_conditions": ["VOLATILE", "TRENDING_UP", "TRENDING_DOWN", "RANGING"],
+    "gap_min_pct": 0.005,
+    "pre_market_volume_min": 1.5
+  },
+
+  "initial_score": 50,
+  "changelog": []
+}

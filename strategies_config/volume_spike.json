@@ -1,0 +1,32 @@
+{
+  "name": "Volume_Spike_Momentum",
+  "enabled": true,
+  "file": "strategies/volume_spike.py",
+  "timeframe": "1Min",
+
+  "params": {
+    "volume_spike_mult": 1.5,
+    "ema_period": 9,
+    "stop_loss_pct": 0.01,
+    "take_profit_pct": 0.02,
+    "max_hold_minutes": 30,
+    "min_candle_body_pct": 0.003
+  },
+
+  "activation_conditions": {
+    "sessions": ["opening", "power_hour"],
+    "market_conditions": ["VOLATILE", "TRENDING_UP", "TRENDING_DOWN"],
+    "not_during_events": ["FOMC", "earnings_first_5min"],
+    "direction_bias": "short",
+    "direction_bias_note": "Based on 2 data points (OXY SHORT +$63, ARKK LONG -$22). SHORT confirmed profitable, LONG not yet proven. Revisit when 5+ LONG winning trades exist."
+  },
+
+  "initial_score": 50,
+  "changelog": [
+    {
+      "date": "2026-03-26",
+      "by": "claude_coach",
+      "change": "Removed RANGING from market_conditions — no evidence Volume_Spike works in RANGING. Added direction_bias=short: OXY SHORT +$63 (take_profit), ARKK LONG -$22 (stop_loss). With cooldown bug fixed, LONG can be re-evaluated when 5+ winning LONG trades are seen."
+    }
+  ]
+}

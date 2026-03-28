@@ -1,0 +1,76 @@
+{
+  "last_updated": "2026-03-26T19:50:41.416941",
+  "scores": {
+    "EMA_Crossover_9_21": 53.7,
+    "Volume_Spike_Momentum": 49.3,
+    "Red_Green_Reversal": 25.6,
+    "RSI_MACD_Momentum": 50.0,
+    "Opening_Range_Breakout": 50.0,
+    "VWAP_Mean_Reversion": 50.0,
+    "Bollinger_Squeeze": 50.0,
+    "Gap_And_Go": 50.0,
+    "Price_Action_Scalp": 50.0
+  },
+  "details": {
+    "EMA_Crossover_9_21": {
+      "score": 53.7,
+      "status": "provisional",
+      "total_trades": 7,
+      "win_rate": 0.143,
+      "profit_factor": 41.6,
+      "notes": "SBUX +144 (winning setup: SHORT+TRENDING_DOWN+Opening). 6 losses from RANGING bug (fixed)"
+    },
+    "Volume_Spike_Momentum": {
+      "score": 49.3,
+      "status": "provisional",
+      "total_trades": 6,
+      "win_rate": 0.167,
+      "profit_factor": 1.84,
+      "notes": "OXY SHORT +63 works. 4/5 losses = PFE cooldown bug. Adjusted WR ~33%"
+    },
+    "Red_Green_Reversal": {
+      "score": 25.6,
+      "status": "provisional",
+      "total_trades": 3,
+      "win_rate": 0.333,
+      "profit_factor": 0.08,
+      "notes": "Bad R:R. Needs watchlist."
+    },
+    "RSI_MACD_Momentum": {
+      "score": 50.0,
+      "status": "new",
+      "total_trades": 0,
+      "win_rate": 0.0
+    },
+    "Opening_Range_Breakout": {
+      "score": 50.0,
+      "status": "new",
+      "total_trades": 0,
+      "win_rate": 0.0
+    },
+    "VWAP_Mean_Reversion": {
+      "score": 50.0,
+      "status": "new",
+      "total_trades": 0,
+      "win_rate": 0.0
+    },
+    "Bollinger_Squeeze": {
+      "score": 50.0,
+      "status": "new",
+      "total_trades": 0,
+      "win_rate": 0.0
+    },
+    "Gap_And_Go": {
+      "score": 50.0,
+      "status": "new",
+      "total_trades": 0,
+      "win_rate": 0.0
+    },
+    "Price_Action_Scalp": {
+      "score": 50.0,
+      "status": "new",
+      "total_trades": 0,
+      "win_rate": 0.0
+    }
+  }
+}

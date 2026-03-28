@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="UTF-8">
+<title>מדריך Google Cloud</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: #0f1117; color: #e0e0e0; padding: 30px; max-width: 860px; margin: 0 auto; }
+  h1 { color: #fff; text-align: center; font-size: 26px; margin-bottom: 8px; }
+  .subtitle { text-align: center; color: #888; margin-bottom: 40px; font-size: 15px; }
+  .step { background: #1a1d27; border-radius: 14px; padding: 24px 28px; margin-bottom: 20px; border: 1px solid #2a2d3a; position: relative; }
+  .step-num { position: absolute; top: -14px; right: 24px; background: #1a73e8; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; }
+  .step h2 { color: #fff; font-size: 18px; margin-bottom: 12px; }
+  .step p { color: #aaa; line-height: 1.8; margin-bottom: 10px; }
+  .btn-link { display: inline-block; background: #1a73e8; color: white; padding: 10px 22px; border-radius: 8px; text-decoration: none; font-weight: bold; margin: 8px 0; font-size: 15px; }
+  .btn-link:hover { background: #1557b0; }
+  .code { background: #12151f; border: 1px solid #2a2d3a; border-radius: 8px; padding: 14px 16px; margin: 10px 0; font-family: monospace; font-size: 13px; color: #a5b4fc; white-space: pre-wrap; word-break: break-all; line-height: 1.7; }
+  .warning { background: #2d1f00; border: 1px solid #f59e0b; border-radius: 8px; padding: 12px 16px; color: #fbbf24; margin: 10px 0; }
+  .success { background: #0d2d1a; border: 1px solid #22c55e; border-radius: 8px; padding: 12px 16px; color: #86efac; margin: 10px 0; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; margin: 10px 0; }
+  .card { background: #12151f; border: 1px solid #2a2d3a; border-radius: 8px; padding: 12px 16px; flex: 1; min-width: 150px; }
+  .card .label { color: #888; font-size: 12px; margin-bottom: 4px; }
+  .card .val { color: #fff; font-weight: bold; }
+  code { background: #2a2d3a; padding: 2px 7px; border-radius: 4px; font-size: 13px; color: #a5b4fc; }
+  .img-hint { background: #1e2030; border: 1px dashed #3a3d4a; border-radius: 8px; padding: 16px; margin: 10px 0; color: #888; text-align: center; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<h1>☁️ העלאת הסוכן ל-Google Cloud</h1>
+<p class="subtitle">חינמי לנצח • VM בארה"ב • ~25 דקות הגדרה</p>
+
+<!-- STEP 1 -->
+<div class="step">
+  <div class="step-num">1</div>
+  <h2>פתח חשבון Google Cloud</h2>
+  <p>לחץ על הכפתור — תגיע לדף הרשמה. אם יש לך Gmail, השתמש בו.</p>
+  <a class="btn-link" href="https://cloud.google.com/free" target="_blank">👉 פתח חשבון Google Cloud חינמי</a>
+  <p>לחץ <strong>"Get started for free"</strong> ↓ אמת עם כרטיס אשראי ↓ קבל $300 קרדיט ל-90 יום</p>
+  <div class="warning">⚠️ כרטיס אשראי לאימות בלבד — Google לא גובים אוטומטית. ה-VM החינמי ממשיך גם אחרי 90 יום.</div>
+</div>
+
+<!-- STEP 2 -->
+<div class="step">
+  <div class="step-num">2</div>
+  <h2>צור VM חינמי (Compute Engine)</h2>
+  <p>בתפריט הצד: <strong>Compute Engine → VM instances → Create Instance</strong></p>
+  <div class="row">
+    <div class="card"><div class="label">Name</div><div class="val">trading-agent</div></div>
+    <div class="card"><div class="label">Region</div><div class="val">us-east1 (SC)</div></div>
+    <div class="card"><div class="label">Machine type</div><div class="val">e2-micro</div></div>
+    <div class="card"><div class="label">OS</div><div class="val">Ubuntu 22.04 LTS</div></div>
+    <div class="card"><div class="label">Disk</div><div class="val">30 GB</div></div>
+    <div class="card"><div class="label">עלות</div><div class="val">$0/חודש ♾️</div></div>
+  </div>
+  <div class="warning">⚠️ חשוב: Region חייב להיות <strong>us-east1, us-west1, או us-central1</strong> כדי להיות חינמי!</div>
+  <p>בסוף הדף לחץ <strong>Create</strong> ↓ המתן דקה ↓ לחץ על <strong>SSH</strong> לצד ה-VM (פותח Terminal ישירות בדפדפן!)</p>
+  <div class="success">✅ Google Cloud פותח Terminal בדפדפן — לא צריך להוריד SSH keys!</div>
+</div>
+
+<!-- STEP 3 -->
+<div class="step">
+  <div class="step-num">3</div>
+  <h2>העלה את הקוד ל-VM</h2>
+  <p>בתוך ה-Terminal שנפתח בדפדפן, הרץ:</p>
+  <div class="code">sudo apt-get install -y git rsync</div>
+  <p>עכשיו פתח <strong>Terminal על ה-Mac שלך</strong> והרץ (מחליף את כל ה-Oracle בקוד):</p>
+  <div class="code"># קבל את שם הפרויקט וה-VM שלך מהאתר
+ZONE="us-east1-b"      # או כל zone שבחרת
+INSTANCE="trading-agent"
+
+# העלה את הקוד
+gcloud compute scp --recurse ~/trading-agent $INSTANCE:~/trading-agent --zone=$ZONE
+
+# התחבר
+gcloud compute ssh $INSTANCE --zone=$ZONE</div>
+  <div class="warning">⚠️ אם אין לך gcloud CLI — אפשר גם להעלות ישירות מהדפדפן: לחץ על שם ה-VM ← Upload File</div>
+</div>
+
+<!-- STEP 4 -->
+<div class="step">
+  <div class="step-num">4</div>
+  <h2>הגדר API Keys</h2>
+  <p>בתוך ה-Terminal (בדפדפן או Terminal Mac):</p>
+  <div class="code">cd ~/trading-agent
+cp .env.example .env
+nano .env</div>
+  <p>מלא את הפרטים:</p>
+  <div class="code">ALPACA_API_KEY=your_key_here
+ALPACA_SECRET_KEY=your_secret_here
+TELEGRAM_BOT_TOKEN=your_token_here
+TELEGRAM_CHAT_ID=1766412347</div>
+  <p>שמור: <code>Ctrl+O</code> → <code>Enter</code> → <code>Ctrl+X</code></p>
+</div>
+
+<!-- STEP 5 -->
+<div class="step">
+  <div class="step-num">5</div>
+  <h2>הרץ סקריפט ההתקנה</h2>
+  <p>פקודה אחת שמתקינה הכל:</p>
+  <div class="code">chmod +x deploy/setup_oracle.sh
+bash deploy/setup_oracle.sh</div>
+  <div class="success">✅ מתקין Python, dependencies, ומגדיר auto-start לפי שעות מסחר</div>
+</div>
+
+<!-- STEP 6 -->
+<div class="step">
+  <div class="step-num">6</div>
+  <h2>פתח גישה ל-Dashboard (פורט 5555)</h2>
+  <p><strong>באתר Google Cloud:</strong> VPC Network → Firewall → Create Firewall Rule:</p>
+  <div class="row">
+    <div class="card"><div class="label">Name</div><div class="val">allow-dashboard</div></div>
+    <div class="card"><div class="label">Direction</div><div class="val">Ingress</div></div>
+    <div class="card"><div class="label">Source</div><div class="val">0.0.0.0/0</div></div>
+    <div class="card"><div class="label">Protocol/Port</div><div class="val">TCP: 5555</div></div>
+  </div>
+  <p style="margin-top:10px;"><strong>על ה-VM:</strong></p>
+  <div class="code">sudo ufw allow 5555/tcp
+sudo ufw --force enable</div>
+  <div class="success">✅ הדשבורד יהיה נגיש בכתובת: http://YOUR_EXTERNAL_IP:5555</div>
+</div>
+
+<!-- STEP 7 -->
+<div class="step">
+  <div class="step-num">7</div>
+  <h2>הפעל ובדוק</h2>
+  <div class="code">sudo systemctl start trading-agent
+sudo systemctl start trading-dashboard
+sudo systemctl status trading-agent
+tail -f ~/trading-agent/logs/agent.log</div>
+  <div class="success">✅ הסוכן רץ בענן! מעכשיו הוא יעלה לבד כל יום ב-09:25 ET ויכבה ב-16:05 ET</div>
+</div>
+
+<!-- SUMMARY -->
+<div class="step" style="border-color: #22c55e; border-width: 2px;">
+  <h2>🎉 סיכום — מה קורה אחרי ההגדרה</h2>
+  <div class="row">
+    <div class="card"><div class="label">09:25 ET (כל יום חול)</div><div class="val">🟢 סוכן עולה</div></div>
+    <div class="card"><div class="label">09:30 ET</div><div class="val">📈 מתחיל לסחור</div></div>
+    <div class="card"><div class="label">15:50 ET</div><div class="val">🔒 סוגר פוזיציות</div></div>
+    <div class="card"><div class="label">16:05 ET</div><div class="val">🔴 סוכן נכבה</div></div>
+    <div class="card"><div class="label">עלות חודשית</div><div class="val">$0 ♾️</div></div>
+    <div class="card"><div class="label">Mac נדרש?</div><div class="val">❌ לא</div></div>
+    <div class="card"><div class="label">Dashboard</div><div class="val">http://IP:5555</div></div>
+  </div>
+</div>
+
+</body>
+</html>

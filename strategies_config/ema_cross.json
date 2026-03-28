@@ -1,0 +1,41 @@
+{
+  "name": "EMA_Crossover_9_21",
+  "enabled": true,
+  "file": "strategies/ema_cross.py",
+  "timeframe": "5Min",
+  "params": {
+    "ema_fast": 9,
+    "ema_slow": 21,
+    "rsi_filter_low": 40,
+    "rsi_filter_high": 65,
+    "min_volume_ratio": 0.7,
+    "stop_loss": "below_ema_slow",
+    "take_profit_pct": 0.025
+  },
+  "activation_conditions": {
+    "sessions": [
+      "opening",
+      "midday",
+      "power_hour"
+    ],
+    "market_conditions": [
+      "TRENDING_UP",
+      "TRENDING_DOWN"
+    ],
+    "adx_min": 20,
+    "min_ema_spread_pct": 0.0005
+  },
+  "initial_score": 40,
+  "changelog": [
+    {
+      "date": "2026-03-19",
+      "by": "claude_coach",
+      "change": "Removed RANGING from allowed market_conditions; raised adx_min 15\u219225. All 6 opening trades fired in RANGING/ADX=15 market and hit stop-loss (100% loss rate). EMA crossover requires real trend to work."
+    },
+    {
+      "date": "2026-03-20",
+      "by": "claude_coach",
+      "change": "Added min_ema_spread_pct=0.0005 (0.05%). All 6 losing trades had spread of only 0.005% ($0.03 on $658 SPY) \u2014 statistical noise, not a real crossover signal."
+    }
+  ]
+}

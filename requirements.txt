@@ -1,0 +1,31 @@
+# Trading Agent - Dependencies
+# Install: pip install -r requirements.txt
+
+# Alpaca API
+alpaca-py>=0.21.0
+
+# Technical Analysis
+ta>=0.11.0              # Technical indicators library
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Database
+# sqlite3 is built-in
+
+# Telegram Bot
+python-telegram-bot>=20.0
+
+# Scheduling & Time
+pytz>=2023.3
+schedule>=1.2.0
+
+# Configuration
+python-dotenv>=1.0.0
+
+# Logging (built-in, no extra dep)
+
+# HTTP requests (for market data fallback)
+requests>=2.31.0
+
+# Dashboard
+flask>=3.0.0

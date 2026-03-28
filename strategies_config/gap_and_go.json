@@ -1,0 +1,21 @@
+{
+  "name": "Gap_And_Go",
+  "enabled": true,
+  "file": "strategies/gap_and_go.py",
+  "timeframe": "1Min",
+
+  "params": {
+    "min_gap_pct": 0.005,
+    "min_volume_ratio": 1.0,
+    "stop_loss_pct": 0.008,
+    "take_profit_mult": 2.0
+  },
+
+  "activation_conditions": {
+    "sessions": ["opening"],
+    "market_conditions": ["TRENDING_UP", "TRENDING_DOWN", "VOLATILE", "RANGING"]
+  },
+
+  "initial_score": 50,
+  "changelog": []
+}
