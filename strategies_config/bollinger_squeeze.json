@@ -1,0 +1,24 @@
+{
+  "name": "Bollinger_Squeeze",
+  "enabled": true,
+  "file": "strategies/bollinger_squeeze.py",
+  "timeframe": "5Min",
+
+  "params": {
+    "bb_period": 20,
+    "bb_std": 2.0,
+    "squeeze_bandwidth_threshold": 0.10,
+    "rsi_confirm": true,
+    "min_volume_spike": 0.8,
+    "stop_loss": "opposite_band",
+    "take_profit": "2x_bandwidth"
+  },
+
+  "activation_conditions": {
+    "sessions": ["opening", "midday", "power_hour"],
+    "market_conditions": ["RANGING", "VOLATILE"]
+  },
+
+  "initial_score": 50,
+  "changelog": []
+}

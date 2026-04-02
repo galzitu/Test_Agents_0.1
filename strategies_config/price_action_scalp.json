@@ -1,0 +1,21 @@
+{
+  "name": "Price_Action_Scalp",
+  "enabled": true,
+  "file": "strategies/price_action_scalp.py",
+  "timeframe": "1Min",
+
+  "params": {
+    "min_body_ratio": 0.55,
+    "min_volume_ratio": 0.8,
+    "stop_loss_atr_mult": 1.0,
+    "take_profit_atr_mult": 2.0
+  },
+
+  "activation_conditions": {
+    "sessions": ["opening", "midday", "power_hour"],
+    "market_conditions": ["TRENDING_UP", "TRENDING_DOWN", "VOLATILE", "RANGING"]
+  },
+
+  "initial_score": 50,
+  "changelog": []
+}

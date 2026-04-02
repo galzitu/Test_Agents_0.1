@@ -1,0 +1,28 @@
+{
+  "name": "RSI_MACD_Momentum",
+  "enabled": true,
+  "file": "strategies/rsi_macd.py",
+  "timeframe": "5Min",
+
+  "params": {
+    "rsi_period": 14,
+    "rsi_oversold": 42,
+    "rsi_overbought": 58,
+    "macd_fast": 12,
+    "macd_slow": 26,
+    "macd_signal": 9,
+    "min_volume_ratio": 0.8,
+    "stop_loss_atr_mult": 1.5,
+    "take_profit_atr_mult": 3.0
+  },
+
+  "activation_conditions": {
+    "sessions": ["opening", "midday", "power_hour"],
+    "market_conditions": ["TRENDING_UP", "TRENDING_DOWN", "VOLATILE", "RANGING"],
+    "adx_min": 15,
+    "vix_max": 35
+  },
+
+  "initial_score": 50,
+  "changelog": []
+}

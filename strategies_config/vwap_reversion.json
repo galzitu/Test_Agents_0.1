@@ -1,0 +1,27 @@
+{
+  "name": "VWAP_Mean_Reversion",
+  "enabled": true,
+  "file": "strategies/vwap_reversion.py",
+  "timeframe": "5Min",
+
+  "params": {
+    "deviation_pct": 0.004,
+    "deviation_std": 2.0,
+    "rsi_confirm_long": 46,
+    "rsi_confirm_short": 54,
+    "stop_loss_pct": 0.005,
+    "target": "vwap",
+    "min_volume_ratio": 0.6
+  },
+
+  "activation_conditions": {
+    "sessions": ["midday", "power_hour"],
+    "market_conditions": ["RANGING"],
+    "adx_max": 25,
+    "not_first_15_min": true,
+    "vix_max": 25
+  },
+
+  "initial_score": 50,
+  "changelog": []
+}

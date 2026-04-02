@@ -1,0 +1,37 @@
+{
+  "health_monitor": {
+    "component": "health_monitor",
+    "status": "ok",
+    "details": {
+      "timestamp": "2026-03-28T09:02:07.191029",
+      "db_writable": true,
+      "disk_ok": true,
+      "agent_heartbeat_fresh": true,
+      "dashboard_heartbeat_fresh": false,
+      "alpaca_reachable": true,
+      "market_open": false,
+      "systemd": {
+        "trading-agent": "unavailable",
+        "trading-dashboard": "unavailable"
+      }
+    },
+    "timestamp": "2026-03-28T09:02:07.784349"
+  },
+  "agent": {
+    "component": "agent",
+    "status": "running",
+    "details": {
+      "market_open": false,
+      "session": "closed"
+    },
+    "timestamp": "2026-03-28T09:02:07.176190"
+  },
+  "dashboard": {
+    "component": "dashboard",
+    "status": "running",
+    "details": {
+      "phase": "init"
+    },
+    "timestamp": "2026-03-28T00:05:05.494968"
+  }
+}

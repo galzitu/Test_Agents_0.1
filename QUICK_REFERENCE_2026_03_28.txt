@@ -1,0 +1,144 @@
+================================================================================
+TRADING AGENT BUG HUNT - QUICK REFERENCE CARD
+================================================================================
+
+STATUS: 
+  Agent: Running (market closed, sleeping until Monday)
+  Bugs Fixed: 4 CRITICAL (26/03)
+  Bugs Remaining: 20+ (3 CRITICAL, 6 HIGH, 8+ MEDIUM, 5+ LOW)
+  Next Trading: Monday 30/03 09:30 ET
+
+================================================================================
+3 CRITICAL BUGS TO FIX BEFORE MONDAY
+================================================================================
+
+BUG #1: SQL INJECTION (memory.py:388)
+────────────────────────────────────────────────────────────────────────────
+File:     agent/memory.py, line 388
+Problem:  query += f" LIMIT {last_n}"  ← Not parameterized!
+Impact:   Database corruption, table deletion possible
+Fix:      Use Python list slicing instead: rows[:last_n]
+Time:     5 minutes
+
+BUG #2: RISK CHECK BYPASSED (trader.py:133)
+────────────────────────────────────────────────────────────────────────────
+File:     agent/trader.py, line 133
+Problem:  if not risk_result:  ← Object always truthy!
+Impact:   Risk limits never enforced, unlimited losses possible
+Fix:      if not risk_result.can_trade:  ← Check property instead
+Time:     2 minutes
+
+BUG #3: DIVISION BY ZERO (risk_manager.py:306)
+────────────────────────────────────────────────────────────────────────────
+File:     agent/risk_manager.py, line 306
+Problem:  shares = int(trade_budget / signal.entry_price)  ← No guard!
+Impact:   Agent crashes during position sizing
+Fix:      Add: if signal.entry_price <= 0: return {shares:0}
+Time:     3 minutes
+
+TOTAL TIME TO FIX ALL 3: ~10 minutes (+ testing)
+
+================================================================================
+DOCUMENTATION
+================================================================================
+
+README_BUG_HUNT_2026_03_28.md
+  → Master index, choose your path based on time available
+
+EXECUTIVE_SUMMARY_2026_03_28.md
+  → For managers/stakeholders (5 min read)
+  → Status, risk assessment, action items
+
+CRITICAL_FIXES_NEEDED_2026_03_28.md
+  → For developers (20 min read)
+  → Exact code fixes, before/after, test cases
+
+BUG_REPORT_FINAL_2026_03_28.md
+  → For thorough review (45 min read)
+  → All 24+ bugs, complete analysis
+
+BUG_FIXES_2026_03_26.md
+  → History: 4 bugs that were already fixed
+
+VERIFICATION_CHECKLIST.md
+  → Before/after verification of previous fixes
+
+================================================================================
+IMMEDIATE ACTION ITEMS (before Monday 09:30 ET)
+================================================================================
+
+□ Read CRITICAL_FIXES_NEEDED_2026_03_28.md
+□ Fix BUG #1 (SQL injection) in memory.py:388
+□ Fix BUG #2 (risk check) in trader.py:133
+□ Fix BUG #3 (division by zero) in risk_manager.py:306
+□ Run provided test cases for each fix
+□ Commit fixes and note in agent logs
+□ Verify agent starts without errors
+□ Brief team on fixes before Monday open
+
+================================================================================
+KEY FACTS
+================================================================================
+
+Trading Status:
+  - Consecutive days without trades: 5 (24-28/03)
+  - Total trades (DB): 10
+  - Total trades (real Alpaca): ~10 (syncing issue)
+  - P&L (DB): -$20.79
+  - P&L (real): ~+$57 (would be without bugs)
+
+Current Risks:
+  - Risk limits CAN BE BYPASSED (BUG #2)
+  - Agent CAN CRASH during trading (BUG #3)
+  - Database CAN BE CORRUPTED (BUG #1)
+
+Next Steps:
+  1. FIX 3 CRITICAL BUGS (10 min work)
+  2. TEST with provided test cases (15 min)
+  3. MONITOR during Monday trading (8.5 hours)
+  4. REVIEW evening (Coach analysis)
+  5. FIX HIGH priority bugs next weekend
+
+================================================================================
+FILES TO MODIFY
+================================================================================
+
+1. agent/memory.py
+   Line 388: SQL injection fix
+   
+2. agent/trader.py
+   Line 133: Risk check bypass fix
+
+3. agent/risk_manager.py
+   Line 306: Division by zero fix
+
+================================================================================
+QUESTIONS?
+================================================================================
+
+Q: How long to fix?
+A: 10 minutes for code, 15 minutes for testing
+
+Q: What if we don't fix?
+A: Risk limits bypassed, agent may crash, data corruption
+
+Q: Can we trade without fixing?
+A: NO - too risky. Fix first, then monitor.
+
+Q: How many bugs total?
+A: 24+ bugs identified (4 fixed, 20 remaining)
+
+Q: Which bugs are most urgent?
+A: The 3 CRITICAL bugs shown above
+
+================================================================================
+DOCUMENT LOCATIONS
+================================================================================
+
+All files in: /sessions/intelligent-bold-cray/mnt/trading-agent/
+
+Generated:   2026-03-28 00:30 ET
+Deadline:    2026-03-30 09:30 ET (before market open)
+Status:      AWAITING CRITICAL BUG FIXES
+
+================================================================================

@@ -1,0 +1,95 @@
+================================================================================
+CRITICAL BUG FIX SUMMARY - 2026-03-26
+================================================================================
+
+ISSUE REPORTED:
+- Trades execute successfully in Alpaca (paper trading API) but are NOT saved to 
+  the SQLite database
+- Occurred since at least 23/03/2026
+- Evidence: Coach report shows 10 trades in Alpaca on 23/03, but few/no trades in DB
+- Cooling period bug: triggered on all-time losses instead of today's losses
+
+ROOT CAUSE ANALYSIS:
+================================================================================
+
+BUG #1: MISSING EXCEPTION HANDLING IN TRADE OPENING (CRITICAL)
+File: agent/trader.py, line 192 in execute_signal()
+Problem: save_trade() had NO try/except wrapper
+Result: Order submitted to Alpaca BEFORE DB save, so if save fails, order is 
+        orphaned in Alpaca but never recorded in database
+Impact: Data loss, orphaned positions, reconciliation failures
+
+BUG #2: POOR EXCEPTION HANDLING IN TRADE CLOSING
+File: agent/trader.py, lines 414-463 in close_position()
+Problem: Generic catch-all exception handler caught both broker AND database errors
+Result: If close_trade() failed, order was closed in Alpaca but DB not updated
+Impact: Positions marked "open" in DB while closed in Alpaca, reconciliation failures
+
+BUG #3: CONSECUTIVE LOSSES COUNTER - ALL-TIME INSTEAD OF TODAY
+File: agent/memory.py, lines 444-463 in get_consecutive_losses()
+Problem: Query didn't properly filter by date, counted ALL-TIME losses
+Result: Historical losses triggered cooling period based on stale data
+Evidence: Log shows "6 consecutive losses! Cooling for 30 minutes" on 23/03 even 
+         though no trades were in the DB for that day
+Impact: Agent blocked from trading based on historical performance
+
+BUG #4: MISSING DATABASE CONNECTION TIMEOUTS
+File: agent/memory.py, line 35 in _get_conn()
+Problem: SQLite connections had no timeout configured
+Result: Indefinite hangs or failures when WAL write locks contended
+Impact: Intermittent silent failures to save trades, especially under load
+
+FIXES APPLIED:
+================================================================================
+
+✅ FIX #1: Added try/except around trade save operation
+   - Wrapped entire trade save block (lines 192-222)
+   - Logs CRITICAL message with full stack trace if DB save fails
+   - Returns explicit blocked status to prevent silent failures
+   - Includes Alpaca order ID for reconciliation
+
+✅ FIX #2: Separated DB errors from broker errors
+   - Added inner try/except around close_trade() (lines 430-446)
+   - DB errors logged as CRITICAL before re-raising
+   - Outer handler catches both types and logs with stack trace
+   - Allows proper error propagation and visibility
+
+✅ FIX #3: Fixed consecutive losses date filter
+   - Changed query to filter by timestamp matching today's date
+   - Now uses: "timestamp LIKE ?" with date.today().isoformat()
+   - Only counts today's losses for cooling period calculation
+   - Prevents stale historical data from blocking trades
+
+✅ FIX #4: Added database connection timeouts
+   - Added timeout=10.0 to sqlite3.connect()
+   - Added PRAGMA busy_timeout=10000 for 10 second timeout
+   - Prevents indefinite hangs on database locks
+   - Ensures graceful failure when locks cannot be acquired
+
+VERIFICATION:
+================================================================================
+
+Files Modified:
+1. /sessions/sweet-kind-brahmagupta/mnt/trading-agent/agent/trader.py
+   - Lines 192-222: Exception handling for trade opening
+   - Lines 429-446: Exception handling for trade closing
+
+2. /sessions/sweet-kind-brahmagupta/mnt/trading-agent/agent/memory.py
+   - Lines 35-42: Database connection timeout configuration
+   - Lines 445-465: Consecutive losses date filter fix
+
+All changes are backward-compatible and do not require schema changes.
+
+Testing Recommendations:
+1. Run a day of paper trading and verify all executed trades appear in the DB
+2. Check logs for "CRITICAL" messages - should see none (good sign)
+3. Verify cooling period only triggers based on today's losses
+4. Simulate database lock conditions to verify graceful timeout behavior
+
+Documentation:
+- BUG_FIXES_2026_03_26.md: Detailed analysis of each bug and fix
+- VERIFICATION_CHECKLIST.md: Before/after code comparisons and verification steps
+
+================================================================================
+END OF SUMMARY
+================================================================================

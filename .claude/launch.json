@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "trading-agent",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd /Users/galzituni/trading-agent && source venv/bin/activate && python3 -m agent.main"],
+      "port": 0
+    },
+    {
+      "name": "dashboard",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd /Users/galzituni/trading-agent && source venv/bin/activate && python3 -m agent.dashboard --port 5555"],
+      "port": 5555
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+🤖 CLAUDE COACH — ניתוח יומי 27/03/2026
+==============================
+📊 עסקאות היום: 0
+💰 P&L: $0.00
+
+⚠️ יום 5 ברצף ללא עסקאות (24-27/03)
+──────────────────────────────
+
+🔴 תקלה קריטית שנחשפה:
+הסוכן הופעל ב-10:02 ET (pre-market) אבל קרס מיד אחרי initialization — רק 25 שורות לוג, ללא טיק אחד. health_status תקוע ב-"starting".
+
+Root cause: Agent עובר init אבל לא מגיע ל-main loop.
+סיבות אפשריות:
+• Alpaca API timeout ב-pre-market
+• market_data.py נכשל לפני פתיחת שוק  
+• Exception שקט בלי logging
+
+──────────────────────────────
+📈 מה שעדיין עובד (מ-23/03):
+🏆 EMA SHORT + Opening + TRENDING_DOWN = +$144 SBUX
+🏆 Volume_Spike SHORT + Opening = +$63 OXY
+
+הסוכן יודע לנצח — הוא רק צריך לרוץ.
+──────────────────────────────
+🔧 תיקונים דחופים:
+1. 🔴 Verbose logging בין init לloop
+2. 🔴 Exception handler ב-main() עם CRITICAL log  
+3. 🟡 Watchdog cron job 09:25 ET
+4. 🟡 Per-symbol cooldown 60 דקות
+
+──────────────────────────────
+📊 ציונים נוכחיים:
+• EMA_Crossover: 53.7 (7 trades, לא משתנה)
+• Volume_Spike: 49.3 (6 trades, לא משתנה)
+• שאר האסטרטגיות: 50.0 (ברירת מחדל)
+
+🤖 Claude Coach | 27/03/2026 | שישי
+NOTE: Telegram blocked in sandbox — message saved to file only.
